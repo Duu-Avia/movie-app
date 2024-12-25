@@ -6,7 +6,8 @@ import { CiSearch } from "react-icons/ci";
 import { PiMoonLight } from "react-icons/pi";
 import { SearchIcon } from "./_components/searchicon";
 import { DarkMode } from "./_components/darkmode";
-import { Navigator } from "./_components/navigator";
+import { Navigator, NavigatorActive } from "./_components/navigator";
+
 const options = {
   method: "GET",
   headers: {
@@ -22,8 +23,7 @@ export default function Home() {
     options
   )
     .then((res) => res.json())
-    .then((data) => {
-      
-    });
+    .then((data) => {});
+
   return <Navigator />;
 }
