@@ -7,6 +7,8 @@ import { PiMoonLight } from "react-icons/pi";
 import { SearchIcon } from "./_components/searchicon";
 import { DarkMode } from "./_components/darkmode";
 import { Navigator, NavigatorActive } from "./_components/navigator";
+import {Section} from "./_components/section";
+import { endianness } from "os";
 
 const options = {
   method: "GET",
@@ -25,5 +27,14 @@ export default function Home() {
     .then((res) => res.json())
     .then((data) => {});
 
-  return <Navigator />;
+  return (
+    <>
+     <Navigator />
+     <Section title="Popular" endpoint="popular"/>
+     <Section title="Upcoming" endpoint="upcoming"/>
+     <Section title="Top_rated" endpoint="top_rated"/>
+     
+     </>
+ 
+);
 }
