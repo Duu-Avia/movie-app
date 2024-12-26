@@ -13,7 +13,7 @@ export function Footer() {
         </div>
 
         <div className="">© 2024 Movie Z. All Rights Reserved.</div>
-        <div className="flex w-full gap-[50px] flex justify-between">
+        <div className="flex w-full gap-[50px]  justify-between">
           <div className="w-fit">
             Contact Information
             <div className="flex items-center">
