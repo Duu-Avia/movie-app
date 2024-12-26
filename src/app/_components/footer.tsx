@@ -36,7 +36,7 @@ export function Footer() {
             <div>Follow us</div>
             <div>Follow us</div>
             <div>Follow us</div>
-            <div>Follow us</div>{" "}
+            <div>Follow us</div>
           </div>
         </div>
       </div>

@@ -6,6 +6,12 @@ type Props = {
   title: string;
   endpoint: string;
 };
+type Movietype = {
+  id: number;
+  title: string;
+  poster_path: string;
+  vote_average: number;
+};
 const option = {
   method: "GET",
   headers: {
@@ -20,7 +26,7 @@ export const Section = async ({ title, endpoint }: Props) => {
     option
   );
   const resJson = await apiUrl.json();
-  const movies = resJson.results?.slice(10, 20);
+  const movies = resJson.results?.slice(0, 10);
 
   return (
     <>
@@ -33,7 +39,7 @@ export const Section = async ({ title, endpoint }: Props) => {
       </div>
 
       <div className="grid grid-cols-2 gap-[10px] md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">
-        {movies?.map((movie) => (
+        {movies?.map((movie:Movietype) => (
           <div key={movie.id}>
             <MovieCard movie={movie} />
           </div>

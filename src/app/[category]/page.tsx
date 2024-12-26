@@ -9,7 +9,13 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-export default function Page({ params }) {
+type ParamsType = {
+  params: {
+    category: string;
+  };
+};
+
+export default function Page({ params }: ParamsType) {
   return (
     <div>
       <Section title={params.category} endpoint={params.category} />

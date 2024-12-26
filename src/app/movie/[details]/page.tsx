@@ -1,8 +1,26 @@
 import { Navigator } from "@/app/_components/navigator";
 import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+type ParamsType = {
+  params: {
+    details: string;
+  };
+}
+type genreType = {
+  id: number;
+  name: string;
+}
 
-const options = {
+type directorType = {
+  department: string;
+  job: string;
+  name: string;
+  id: number;
+};
+
+
+
+const options= {
   method: "GET",
   headers: {
     accept: "application/json",
@@ -11,7 +29,7 @@ const options = {
   },
 };
 
-export default async function Page({ params }) {
+export default async function Page({ params }:ParamsType) {
   const apiUrl = await fetch(
     `https://api.themoviedb.org/3/movie/${params.details}`,
     options
@@ -31,12 +49,12 @@ export default async function Page({ params }) {
   return (
     <>
       <Navigator />
-      <div className="flex justify-between">
+      <div className="flex justify-between px-[25px]">
         <div>
-          <h1 className="text-[30px]">{resJson?.title}</h1>
+          <h1 className="text-[30px] ">{resJson?.title}</h1>
           <h2>{resJson?.release_date}</h2>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <div>
             <Star className="stroke-yellow-300 fill-yellow-300" />
           </div>
@@ -52,7 +70,7 @@ export default async function Page({ params }) {
         </div>
 
         <div className="">
-          {resJson?.genres.map((genre) => (
+          {resJson?.genres.map((genre:genreType) => (
             <Badge
               key={genre.id}
               variant="outline"
@@ -64,16 +82,27 @@ export default async function Page({ params }) {
           <div>{resJson.overview}</div>
         </div>
       </div>
-      <div>
-        Director{" "}
+      <div className="flex gap-8 text-[16px] px-[25px] border-b-2 py-[20px]">
+        <h1 className="font-semibold">Director</h1>
         {creditResJson.crew
-          .filter((director) => director.job === "Director")
-          .map((director) => {
-            return <h1>{director.name}</h1>;
+          .filter((director:directorType) => director.job === "Director")
+          .map((director:directorType) => {
+            return <h1 key={director.id}>{director.name}</h1>;
           })}
       </div>
-      <div>Writers </div>
-      <div>Stars</div>
+      <div className="flex gap-8 text-[16px] px-[25px] border-b-2 py-[20px]">
+        <h1 className="font-semibold">Writers </h1>
+        {creditResJson.crew.filter((director:directorType) => director.department === "Writing").slice(0,3)
+          .map((director:directorType) => {
+            return <h1 key={director.id}>{director.name}</h1>;
+          })}</div>
+          <div className="flex px-[25px] gap-12 border-b-2 py-[20px]">
+          <h1 className="font-semibold">Stars</h1> 
+      <div className="flex text-[16px]   w-[80%]">
+        
+        {creditResJson.cast.slice(0,4).map((cast:directorType) => {
+            return <h1 key={cast.id}>{cast.name}</h1>;
+          })}</div></div>
     </>
   );
 }
