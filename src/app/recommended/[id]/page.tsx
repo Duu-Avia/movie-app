@@ -1,4 +1,8 @@
 "use client";
+import { MovieCard } from "@/app/_components/moviecard";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -8,10 +12,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { MovieCard } from "../_components/moviecard";
-import { useRouter } from "next/navigation";
+
 type MovieType = {
   id: number;
   title: string;
@@ -20,21 +21,13 @@ type MovieType = {
   backdrop_path: string;
 };
 
-type ParamsType = {
-  params: {
-    category: string;
-  };
-};
-
-type NewPageType = number | string;
-
 export default function Page() {
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
+  const [movies, setMovies] = useState([]);
   const searchParams = useSearchParams();
-  const page = searchParams.get("page") || "1";
-  const [movies, setMovies] = useState<MovieType[]>();
+  const page = searchParams.get('page') || "1"
   const options = {
     method: "GET",
     headers: {
@@ -44,39 +37,41 @@ export default function Page() {
     },
   };
 
+  const onChangePage =(newPage)=> {
+    const newSearchParams =
+  }
+
   useEffect(() => {
-    const fetchMovies = async () => {
+    const RecoMovie = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${params.category}?language=en-US&page=${page}`,
+        `https://api.themoviedb.org/3/movie/${params.id}/recommendations?${page}`,
         options
       );
       const data = await response.json();
-      setMovies(data?.results?.slice(0, 5));
+      setMovies(data?.results?.slice(0, 10));
     };
-    fetchMovies();
-  }, [params]);
-  const onChangePage = (newPage: NewPageType) => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-
-    newSearchParams.set("page", newPage.toString());
-    const newUrl = pathname + "?" + newSearchParams.toString();
-    router.push(newUrl);
-  };
+    RecoMovie();
+  }, []);
 
   return (
-    <div>
-      {movies?.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
+    <>
+      <div className="text-[#09090B] px-[25px] py-[20px] font-semibold">
+        Recommondation
+      </div>
+      <div className="grid grid-cols-2 gap-[10px] px-[25px] md:grid-cols-3 lg:grid-cols-5 lg:px-10">
+        {movies?.map((movie: MovieType) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
       <Pagination>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious href="#" />
           </PaginationItem>
           <PaginationItem>
-            <PaginationLink onClick={() => onChangePage(1)}>1</PaginationLink>
-            <PaginationLink onClick={() => onChangePage(2)}>2</PaginationLink>
-            <PaginationLink onClick={() => onChangePage(3)}>3</PaginationLink>
+            <PaginationLink>1</PaginationLink>
+            <PaginationLink>2</PaginationLink>
+            <PaginationLink>3</PaginationLink>
           </PaginationItem>
           <PaginationItem>
             <PaginationEllipsis />
@@ -86,6 +81,6 @@ export default function Page() {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-    </div>
+    </>
   );
 }
