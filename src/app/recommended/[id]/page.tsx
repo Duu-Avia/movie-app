@@ -12,6 +12,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import PaginationMade from "@/app/_components/Pagination";
+
 
 type MovieType = {
   id: number;
@@ -22,12 +24,10 @@ type MovieType = {
 };
 
 export default function Page() {
-  const pathname = usePathname();
-  const router = useRouter();
   const params = useParams();
   const [movies, setMovies] = useState([]);
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page') || "1"
+  const [currentPage, setCurrentpage] = useState(1)
+  const [postPerPage, setPostPerPage] = useState(10)
   const options = {
     method: "GET",
     headers: {
@@ -37,21 +37,24 @@ export default function Page() {
     },
   };
 
-  const onChangePage =(newPage)=> {
-    const newSearchParams =
-  }
 
   useEffect(() => {
     const RecoMovie = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${params.id}/recommendations?${page}`,
+        `https://api.themoviedb.org/3/movie/${params.id}/recommendations?`,
         options
       );
       const data = await response.json();
-      setMovies(data?.results?.slice(0, 10));
+      setMovies(data?.results);
     };
     RecoMovie();
   }, []);
+  const lastPostIndex =  currentPage * postPerPage
+  const firstPostIndex = lastPostIndex - postPerPage
+  const currentPost = movies.slice(firstPostIndex, lastPostIndex)
+
+
+
 
   return (
     <>
@@ -59,28 +62,12 @@ export default function Page() {
         Recommondation
       </div>
       <div className="grid grid-cols-2 gap-[10px] px-[25px] md:grid-cols-3 lg:grid-cols-5 lg:px-10">
-        {movies?.map((movie: MovieType) => (
+        {currentPost?.map((movie: MovieType) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink>1</PaginationLink>
-            <PaginationLink>2</PaginationLink>
-            <PaginationLink>3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </>
+      
+      <PaginationMade movies={movies} postPerPage={postPerPage} setCurrentpage={setCurrentpage}/>
+    </> 
   );
 }
