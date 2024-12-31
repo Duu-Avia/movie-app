@@ -12,6 +12,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { IoChevronDownOutline } from "react-icons/io5";
+import { FilteredGenre } from "./FilteredGenre";
 
 export function Navigator() {
   const [isActive, setIsActive] = useState(true);
@@ -55,7 +56,7 @@ export function NavigatorActive({ handleChanger }) {
             <PopoverTrigger>
               <IoChevronDownOutline />
             </PopoverTrigger>
-            <PopoverContent>Place content for the popover here.</PopoverContent>
+            <PopoverContent><FilteredGenre/></PopoverContent>
           </Popover>
         </div>
 
