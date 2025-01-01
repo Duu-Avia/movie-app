@@ -26,7 +26,7 @@ export const Section = async ({ title, endpoint }: Props) => {
     option
   );
   const resJson = await apiUrl.json();
-  const movies = resJson.results?.slice(0, 10);
+  const movies = resJson?.results.slice(0, 10);
 
   return (
     <>

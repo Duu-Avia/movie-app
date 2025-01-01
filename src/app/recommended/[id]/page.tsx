@@ -23,7 +23,7 @@ type MovieType = {
   backdrop_path: string;
 };
 
-export default function Page() {
+export default function PageRecommend() {
   const params = useParams();
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentpage] = useState(1)
@@ -41,6 +41,7 @@ export default function Page() {
   useEffect(() => {
     const RecoMovie = async () => {
       const response = await fetch(
+
         `https://api.themoviedb.org/3/movie/${params.id}/recommendations?`,
         options
       );
@@ -52,6 +53,7 @@ export default function Page() {
   const lastPostIndex =  currentPage * postPerPage
   const firstPostIndex = lastPostIndex - postPerPage
   const currentPost = movies.slice(firstPostIndex, lastPostIndex)
+  
 
 
 
@@ -66,8 +68,9 @@ export default function Page() {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
-      
-      <PaginationMade movies={movies} postPerPage={postPerPage} setCurrentpage={setCurrentpage}/>
+     
+      <PaginationMade movies={movies} postPerPage={postPerPage} setCurrentpage={setCurrentpage} currentPage={currentPage}/>
+     
     </> 
   );
 }

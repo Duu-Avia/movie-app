@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import Link from "next/link";
-export const MovieCard = ({ movie, genreMovie }) => {
+export const MovieCard = ({ movie, }) => {
   return (
     <Link href={`/movie/${movie.id}`}>
       <div className="rounded-lg bg-gray-100">

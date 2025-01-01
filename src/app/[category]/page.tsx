@@ -12,6 +12,7 @@ import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MovieCard } from "../_components/moviecard";
 import { useRouter } from "next/navigation";
+import PaginationMade from "../_components/Pagination";
 type MovieType = {
   id: number;
   title: string;
@@ -34,7 +35,9 @@ export default function Page() {
   const params = useParams();
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || "1";
-  const [movies, setMovies] = useState<MovieType[]>();
+  const [movies, setMovies] = useState<MovieType[]>([]);
+  const [currentPage, setCurrentpage] = useState(1)
+  const [postPerPage, setPostPerPage] = useState(10)
   const options = {
     method: "GET",
     headers: {
@@ -51,10 +54,15 @@ export default function Page() {
         options
       );
       const data = await response.json();
-      setMovies(data?.results?.slice(0, 5));
+      setMovies(data?.results);
     };
     fetchMovies();
   }, [params]);
+
+
+const lastPostIndex = currentPage * postPerPage
+const firstPostIndex = lastPostIndex - postPerPage
+const currentPost = movies.slice(firstPostIndex, lastPostIndex)
   const onChangePage = (newPage: NewPageType) => {
     const newSearchParams = new URLSearchParams(searchParams.toString());
 
@@ -65,27 +73,10 @@ export default function Page() {
 
   return (
     <div>
-      {movies?.map((movie) => (
+      {currentPost?.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink onClick={() => onChangePage(1)}>1</PaginationLink>
-            <PaginationLink onClick={() => onChangePage(2)}>2</PaginationLink>
-            <PaginationLink onClick={() => onChangePage(3)}>3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+    <PaginationMade movies={movies} postPerPage={postPerPage} setCurrentpage={setCurrentpage} currentPage={currentPage}/>
     </div>
   );
 }
