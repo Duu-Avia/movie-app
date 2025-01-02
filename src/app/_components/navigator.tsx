@@ -5,6 +5,7 @@ import { PiMoonLight } from "react-icons/pi";
 import { SearchIcon } from "./searchicon";
 import { DarkMode } from "./darkmode";
 import { useState } from "react";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import {
   Popover,
@@ -26,10 +27,13 @@ export function Navigator() {
         <NavigatorActive handleChanger={handleChanger} />
       ) : (
         <>
-          <div className="flex text-indigo-700 gap-[8px]  py-[19.5px] pl-[20px]">
-            <FiFilm className="size-[20px]  text-indigo-700" />
-            <div className="italic text-[16px] ">Movie Z</div>
-          </div>
+          <Link href="/">
+            <div className="flex text-indigo-700 gap-[8px]  py-[19.5px] pl-[20px]">
+              <FiFilm className="size-[20px]  text-indigo-700" />
+              <div className="italic text-[16px] ">Movie Z</div>
+            </div>
+          </Link>
+
           <div className="flex py-[19.5px] pr-[20px] gap-[12px]">
             <button
               onClick={handleChanger}
@@ -56,7 +60,9 @@ export function NavigatorActive({ handleChanger }) {
             <PopoverTrigger>
               <IoChevronDownOutline />
             </PopoverTrigger>
-            <PopoverContent><FilteredGenre/></PopoverContent>
+            <PopoverContent>
+              <FilteredGenre />
+            </PopoverContent>
           </Popover>
         </div>
 

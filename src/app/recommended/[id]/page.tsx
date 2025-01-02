@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/pagination";
 import PaginationMade from "@/app/_components/Pagination";
 
-
 type MovieType = {
   id: number;
   title: string;
@@ -26,8 +25,8 @@ type MovieType = {
 export default function PageRecommend() {
   const params = useParams();
   const [movies, setMovies] = useState([]);
-  const [currentPage, setCurrentpage] = useState(1)
-  const [postPerPage, setPostPerPage] = useState(10)
+  const [currentPage, setCurrentpage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(10);
   const options = {
     method: "GET",
     headers: {
@@ -37,11 +36,9 @@ export default function PageRecommend() {
     },
   };
 
-
   useEffect(() => {
     const RecoMovie = async () => {
       const response = await fetch(
-
         `https://api.themoviedb.org/3/movie/${params.id}/recommendations?`,
         options
       );
@@ -50,13 +47,10 @@ export default function PageRecommend() {
     };
     RecoMovie();
   }, []);
-  const lastPostIndex =  currentPage * postPerPage
-  const firstPostIndex = lastPostIndex - postPerPage
-  const currentPost = movies.slice(firstPostIndex, lastPostIndex)
-  
 
-
-
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentPost = movies.slice(firstPostIndex, lastPostIndex);
 
   return (
     <>
@@ -68,9 +62,13 @@ export default function PageRecommend() {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
-     
-      <PaginationMade movies={movies} postPerPage={postPerPage} setCurrentpage={setCurrentpage} currentPage={currentPage}/>
-     
-    </> 
+
+      <PaginationMade
+        movies={movies}
+        postPerPage={postPerPage}
+        setCurrentpage={setCurrentpage}
+        currentPage={currentPage}
+      />
+    </>
   );
 }
