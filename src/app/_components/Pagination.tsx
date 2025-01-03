@@ -17,8 +17,6 @@ const PaginationMade = ({
     setCurrentpage(currentPage + 1);
   };
 
-  console.log(movies);
-  console.log(pages);
   return (
     <div className="flex gap-5 ">
       <div>

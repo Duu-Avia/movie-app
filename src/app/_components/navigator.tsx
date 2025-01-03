@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/popover";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { FilteredGenre } from "./FilteredGenre";
+import { SearchMain } from "./SearchMainPage";
 
 export function Navigator() {
   const [isActive, setIsActive] = useState(true);
@@ -66,7 +67,7 @@ export function NavigatorActive({ handleChanger }) {
           </Popover>
         </div>
 
-        <Input />
+        <SearchMain />
         <button onClick={handleChanger}>X</button>
       </header>
     </>

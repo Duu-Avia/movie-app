@@ -7,7 +7,7 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 //
-export const FilteredGenre = () => {
+export const FilteredGenre = ({ genreId }) => {
   const [genres, setGenres] = useState([]);
   useEffect(() => {
     const FetchGenre = async () => {
@@ -27,9 +27,12 @@ export const FilteredGenre = () => {
         {genres?.map((genre) => (
           <Link
             key={`genred-${genre.id}`}
-            href={`/search?with_genres=${genre.id}`}
+            href={`/discover?with_genres=${genre.id}`}
           >
-            <Badge variant="outline">
+            <Badge
+              variant="outline"
+              className={`${genreId == genre.id ? "font-bold" : "font-normal"}`}
+            >
               {genre.name}
               <ChevronRight />
             </Badge>
