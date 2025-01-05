@@ -14,9 +14,10 @@ import {
 } from "@/components/ui/popover";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { FilteredGenre } from "./FilteredGenre";
-import { SearchMain } from "./SearchMainPage";
+import { SearchMain } from "./SearchMain";
 
-export function Navigator() {
+
+export function Navigator({onSearchChange}) {
   const [isActive, setIsActive] = useState(true);
   const handleChanger = () => {
     setIsActive(!isActive);
@@ -25,7 +26,7 @@ export function Navigator() {
   return (
     <header className="flex justify-between items-center">
       {!isActive ? (
-        <NavigatorActive handleChanger={handleChanger} />
+        <NavigatorActive handleChanger={handleChanger}  onSearchChange={onSearchChange}/>
       ) : (
         <>
           <Link href="/">
@@ -52,7 +53,7 @@ export function Navigator() {
   );
 }
 
-export function NavigatorActive({ handleChanger }) {
+export function NavigatorActive({ handleChanger, onSearchChange }) {
   return (
     <>
       <header className="flex justify-center items-center">

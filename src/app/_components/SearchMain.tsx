@@ -3,11 +3,13 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { SearchList } from "./SearchList";
 
-export const SearchMain = () => {
-  const [searchValue, setSearchValue] = useState("");
+export const SearchMain = ({searchValue, setSearchValue, onInputChange}) => {
+ 
 
   const handleChanger = (e) => {
-    setSearchValue(e.target.value);
+   
+    onInputChange(e.target.value)
+  
   };
 
   return (
