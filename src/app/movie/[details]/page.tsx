@@ -59,7 +59,6 @@ export default async function Page({ params }: ParamsType) {
 
   return (
     <>
-      <Navigator />
       <div className="flex justify-between px-[25px]">
         <div>
           <h1 className="text-[30px] ">{resJson?.title}</h1>

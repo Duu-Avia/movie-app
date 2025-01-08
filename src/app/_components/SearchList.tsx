@@ -59,7 +59,7 @@ export const SearchList = ({ searchValue }) => {
             </Link>
           ))}
         </div>
-        <Link href={`/search`}>
+        <Link href={`/search?query=${searchValue}`}>
           <button className="text-[14px] text-[#09090B] py-[15px] px-[16px]">
             See all results for "{searchValue}"
           </button>

@@ -16,8 +16,7 @@ import { IoChevronDownOutline } from "react-icons/io5";
 import { FilteredGenre } from "./FilteredGenre";
 import { SearchMain } from "./SearchMain";
 
-
-export function Navigator({onSearchChange}) {
+export function Navigator() {
   const [isActive, setIsActive] = useState(true);
   const handleChanger = () => {
     setIsActive(!isActive);
@@ -26,7 +25,7 @@ export function Navigator({onSearchChange}) {
   return (
     <header className="flex justify-between items-center">
       {!isActive ? (
-        <NavigatorActive handleChanger={handleChanger}  onSearchChange={onSearchChange}/>
+        <NavigatorActive handleChanger={handleChanger} />
       ) : (
         <>
           <Link href="/">
@@ -53,7 +52,7 @@ export function Navigator({onSearchChange}) {
   );
 }
 
-export function NavigatorActive({ handleChanger, onSearchChange }) {
+export function NavigatorActive({ handleChanger }) {
   return (
     <>
       <header className="flex justify-center items-center">

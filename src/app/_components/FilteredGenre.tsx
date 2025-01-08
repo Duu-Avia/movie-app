@@ -7,7 +7,8 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 //
-export const FilteredGenre = ({ genreId }) => {
+export const FilteredGenre = () => {
+  const genreId = 12;
   const [genres, setGenres] = useState([]);
   useEffect(() => {
     const FetchGenre = async () => {

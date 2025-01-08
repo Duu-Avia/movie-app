@@ -93,7 +93,6 @@ export default function PageSearch() {
 
   return (
     <>
-      <Navigator />
       <div className="px-[20px] pb-[20px]">
         <div className="text-[#09090B] text-[1.5rem] font-[600] py-5">
           Search filter

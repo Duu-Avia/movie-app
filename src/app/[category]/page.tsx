@@ -35,9 +35,10 @@ export default function Page() {
   const params = useParams();
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || "1";
+
   const [movies, setMovies] = useState<MovieType[]>([]);
-  const [currentPage, setCurrentpage] = useState(1)
-  const [postPerPage, setPostPerPage] = useState(10)
+  const [currentPage, setCurrentpage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(10);
   const options = {
     method: "GET",
     headers: {
@@ -59,10 +60,9 @@ export default function Page() {
     fetchMovies();
   }, [params]);
 
-
-const lastPostIndex = currentPage * postPerPage
-const firstPostIndex = lastPostIndex - postPerPage
-const currentPost = movies.slice(firstPostIndex, lastPostIndex)
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentPost = movies.slice(firstPostIndex, lastPostIndex);
   const onChangePage = (newPage: NewPageType) => {
     const newSearchParams = new URLSearchParams(searchParams.toString());
 
@@ -73,10 +73,18 @@ const currentPost = movies.slice(firstPostIndex, lastPostIndex)
 
   return (
     <div>
+      <div className="text-[#09090B] text-[1.5rem] font-[600]">
+        {params.category}
+      </div>
       {currentPost?.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
-    <PaginationMade movies={movies} postPerPage={postPerPage} setCurrentpage={setCurrentpage} currentPage={currentPage}/>
+      <PaginationMade
+        movies={movies}
+        postPerPage={postPerPage}
+        setCurrentpage={setCurrentpage}
+        currentPage={currentPage}
+      />
     </div>
   );
 }
