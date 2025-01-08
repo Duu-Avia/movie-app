@@ -72,13 +72,15 @@ export default function Page() {
   };
 
   return (
-    <div>
-      <div className="text-[#09090B] text-[1.5rem] font-[600]">
+    <div className="px-[20px]">
+      <div className="text-[#09090B] text-[1.5rem] font-[600] py-[35px]">
         {params.category}
       </div>
-      {currentPost?.map((movie) => (
+      <div className="grid grid-cols-2 gap-[10px]  md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">   
+        {currentPost?.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
-      ))}
+      ))}</div>
+    
       <PaginationMade
         movies={movies}
         postPerPage={postPerPage}

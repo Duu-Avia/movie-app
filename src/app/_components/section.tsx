@@ -30,15 +30,15 @@ export const Section = async ({ title, endpoint }: Props) => {
 
   return (
     <>
-      <div className="flex justify-between p-5 font-semibold">
+      <div className="flex justify-between p-5 py-[45px] font-[600] text-[1.5rem] lg:px-10">
         {title}
-        <Link href={`/${endpoint}`} className="flex items-center gap-5">
+        <Link href={`/${endpoint}`} className="flex items-center gap-5 text-[0.9rem] font-[500]">
           See more
           <BsArrowRight />
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-[10px] md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">
+      <div className="grid grid-cols-2 gap-[10px] px-[20px] md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">
         {movies?.map((movie: Movietype) => (
           <div key={movie.id}>
             <MovieCard movie={movie} />

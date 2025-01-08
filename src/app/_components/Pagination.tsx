@@ -18,7 +18,7 @@ const PaginationMade = ({
   };
 
   return (
-    <div className="flex gap-5 ">
+    <div className="flex gap-5 pt-[30px]">
       <div>
         <button onClick={clickHandlerMinus}>Prev</button>
       </div>

@@ -21,7 +21,7 @@ export const SearchList = ({ searchValue }) => {
 
   return (
     <>
-      <div className="absolute top-[70px] left-[30px] w-100% h-100% bg-white border-[1px] border-solid rounded-lg">
+      <div className="absolute z-10 top-[70px] left-[30px] w-100% h-100% bg-white border-[1px] border-solid rounded-lg">
         <div>
           {movies?.map((movie) => (
             <Link key={`searchMovie-${movie.id}`} href={`/movie/${movie.id}`}>

@@ -55,7 +55,7 @@ export function Navigator() {
 export function NavigatorActive({ handleChanger }) {
   return (
     <>
-      <header className="flex justify-center items-center">
+      <header className="flex justify-center items-center pt-[15px] pb-[35px]">
         <div className="size-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md">
           <Popover>
             <PopoverTrigger>

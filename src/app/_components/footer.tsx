@@ -5,7 +5,7 @@ import { LuPhone } from "react-icons/lu";
 
 export function Footer() {
   return (
-    <div className="bg-indigo-700 w-full h-[280px]">
+    <div className="bg-indigo-700 w-full h-[280px] mt-[50px]">
       <div className="text-[14px] text-[#FAFAFA] w-[80%] mx-auto pt-[50px]">
         <div className="flex">
           <FiFilm className="size-[20px] text-[rgb(250,250,250)]" />
