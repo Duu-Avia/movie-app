@@ -50,18 +50,21 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex justify-center items-center mt-[-55px] pb-[25px]">
+      <div className="flex justify-center items-center md:mt-[-60px] md:pb-[20px] ">
         <div className="size-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md max-md:hidden">
           <Popover>
-            <PopoverTrigger>
-              <IoChevronDownOutline />
+            <PopoverTrigger className="flex ">
+              <div>
+                <IoChevronDownOutline />
+              </div>
+              <div>Genre</div>
             </PopoverTrigger>
             <PopoverContent>
               <FilteredGenre />
             </PopoverContent>
           </Popover>
         </div>
-        <div className="max-md:hidden">
+        <div className="">
           <SearchMain />
         </div>
       </div>
