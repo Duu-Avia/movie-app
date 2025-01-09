@@ -38,7 +38,7 @@ export function Navigator() {
           <div className="flex py-[19.5px] pr-[20px] gap-[12px]">
             <button
               onClick={handleChanger}
-              className="size-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md"
+              className="size-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md md:hidden"
             >
               <CiSearch className=" size-[16px] text-[#18181B]" />
             </button>
@@ -68,7 +68,9 @@ export function NavigatorActive({ handleChanger }) {
         </div>
 
         <SearchMain />
-        <button onClick={handleChanger}>X</button>
+        <button className="md:hidden" onClick={handleChanger}>
+          X
+        </button>
       </header>
     </>
   );

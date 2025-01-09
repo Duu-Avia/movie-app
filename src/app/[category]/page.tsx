@@ -76,11 +76,12 @@ export default function Page() {
       <div className="text-[#09090B] text-[1.5rem] font-[600] py-[35px]">
         {params.category}
       </div>
-      <div className="grid grid-cols-2 gap-[10px]  md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">   
+      <div className="grid grid-cols-2 gap-[10px]  md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">
         {currentPost?.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}</div>
-    
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+
       <PaginationMade
         movies={movies}
         postPerPage={postPerPage}

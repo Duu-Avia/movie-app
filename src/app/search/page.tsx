@@ -12,12 +12,9 @@ export default function PageSearch() {
   const [movies, setMovies] = useState([]);
 
   const searchParams = useSearchParams();
-  const query = searchParams.get("query")
+  const query = searchParams.get("query");
   const [currentPage, setCurrentpage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(10);
-
-
-  
 
   useEffect(() => {
     const fetchGenreMovies = async () => {
@@ -37,11 +34,8 @@ export default function PageSearch() {
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPost = movies?.slice(firstPostIndex, lastPostIndex);
 
-
   return (
     <>
-      
-     
       <div className="px-[20px] pb-[20px]">
         <div className="text-[#09090B] text-[1.5rem] font-[600] py-5">
           Search filter
@@ -54,7 +48,7 @@ export default function PageSearch() {
         </div>
       </div>
       <div className="px-[20px]">
-        <FilteredGenre  />
+        <FilteredGenre />
       </div>
       <div className="flex gap-1 px-[20px] py-[20px] text-[1.26rem] font-[600]">
         20 titles in
@@ -70,7 +64,6 @@ export default function PageSearch() {
         setCurrentpage={setCurrentpage}
         currentPage={currentPage}
       />
-
     </>
   );
 }
