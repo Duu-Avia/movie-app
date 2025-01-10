@@ -3,7 +3,7 @@ import { FiFilm } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
 import { PiMoonLight } from "react-icons/pi";
 import { SearchIcon } from "./searchicon";
-import { DarkMode } from "./darkmode";
+
 import { useState } from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
@@ -18,8 +18,26 @@ import { SearchMain } from "./SearchMain";
 
 export function Navigator() {
   const [isActive, setIsActive] = useState(true);
+  const [isClicked, setIsClicked] = useState(false);
   const handleChanger = () => {
     setIsActive(!isActive);
+  };
+
+  const darkModeToggle = () => {
+    setIsClicked(!isClicked);
+    console.log(isClicked);
+    if (isClicked) {
+      setWhiteMode();
+    } else {
+      setDarkMode();
+    }
+  };
+
+  const setDarkMode = () => {
+    document.querySelector("body")?.setAttribute("data-theme", "dark");
+  };
+  const setWhiteMode = () => {
+    document.querySelector("body")?.setAttribute("data-theme", "white");
   };
 
   return (
@@ -42,7 +60,10 @@ export function Navigator() {
             >
               <CiSearch className=" size-[16px] text-[#18181B]" />
             </button>
-            <button className="size-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md">
+            <button
+              onClick={darkModeToggle}
+              className="size-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md"
+            >
               <PiMoonLight className=" size-[16px] text-[#18181B]" />
             </button>
           </div>

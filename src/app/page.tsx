@@ -5,7 +5,7 @@ import { FiFilm } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
 import { PiMoonLight } from "react-icons/pi";
 import { SearchIcon } from "./_components/searchicon";
-import { DarkMode } from "./_components/darkmode";
+import { DarkMode } from "./_components/DarkMode";
 import { Navigator, NavigatorActive } from "./_components/navigator";
 import { Section } from "./_components/section";
 import { endianness } from "os";
@@ -50,21 +50,21 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex justify-center items-center md:mt-[-60px] md:pb-[20px] ">
-        <div className="size-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md max-md:hidden">
+      <div className="flex justify-center items-center md:mt-[-60px] md:pb-[20px] gap-3">
+        <div className="w-[90px] h-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md max-md:hidden">
           <Popover>
-            <PopoverTrigger className="flex ">
-              <div>
+            <PopoverTrigger>
+              <div className="flex items-center gap-2">
                 <IoChevronDownOutline />
+                <p>Genre </p>
               </div>
-              <div>Genre</div>
             </PopoverTrigger>
             <PopoverContent>
               <FilteredGenre />
             </PopoverContent>
           </Popover>
         </div>
-        <div className="">
+        <div className="max-md:hidden">
           <SearchMain />
         </div>
       </div>

@@ -31,7 +31,7 @@ export function Footer() {
               </div>
             </div>
           </div>
-          <div className="w-fit ">
+          <div className="w-fit md:mt-[-50px]">
             <div className="pb-[10px]">Follow us</div>
             <div className="pb-[10px]">Facebook</div>
             <div className="pb-[10px]">Instagram</div>

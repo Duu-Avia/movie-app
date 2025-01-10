@@ -93,27 +93,33 @@ export default function PageSearch() {
 
   return (
     <>
-      <div className="px-[20px] pb-[20px]">
-        <div className="text-[#09090B] text-[1.5rem] font-[600] py-5">
-          Search filter
+      <div className="md:flex">
+        <div className="px-[30px]">
+          <div className=" px-[20px] pb-[20px]">
+            <div className="text-[#09090B] text-[1.5rem] font-[600] py-5">
+              Search filter
+            </div>
+            <div className="text-[#09090B] text-[1.25rem] font-[600] ">
+              Genre
+            </div>
+            <div className="text-[#09090B] text-[1rem] ">
+              See lists of movies by genre
+            </div>
+          </div>
+          <div className="px-[20px] ">
+            <FilteredGenre genreId={genres} />
+          </div>
         </div>
-        <div className="text-[#09090B] text-[1.25rem] font-[600] ">
-          Search by genre
+        <div className="border-solid border-l-[1px]">
+          <div className="flex gap-1 px-[40px] py-[20px] text-[1.26rem] font-[600]">
+            20 titles in <TestText />
+          </div>
+          <div className="grid grid-cols-2 gap-[10px] px-6 md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">
+            {currentPost?.map((movie) => (
+              <MovieCard key={`movie-${movie?.id}`} movie={movie} />
+            ))}
+          </div>
         </div>
-        <div className="text-[#09090B] text-[1rem] ">
-          See lists of movies by genre
-        </div>
-      </div>
-      <div className="px-[20px]">
-        <FilteredGenre genreId={genres} />
-      </div>
-      <div className="flex gap-1 px-[20px] py-[20px] text-[1.26rem] font-[600]">
-        20 titles in <TestText />
-      </div>
-      <div className="grid grid-cols-2 gap-[10px] px-6 md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">
-        {currentPost?.map((movie) => (
-          <MovieCard key={`movie-${movie?.id}`} movie={movie} />
-        ))}
       </div>
       <PaginationMade
         movies={movies}

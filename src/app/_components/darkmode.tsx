@@ -1,10 +1,17 @@
-import { PiMoonLight } from "react-icons/pi";
-export function DarkMode() {
-  return (
-    <>
-      <button className="size-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md">
-        <PiMoonLight className=" size-[16px] text-[#18181B]" />
-      </button>
-    </>
-  );
+"use client";
+import { useState } from "react";
+
+export function DarkMode({ isClicked }) {
+  const setDarkMode = () => {
+    document.querySelector("body")?.setAttribute("data-theme", "dark");
+  };
+
+  const setWhiteMode = () => {
+    document.querySelector("body")?.setAttribute("data-theme", "white");
+  };
+  if (isClicked === true) {
+    setDarkMode;
+  } else setWhiteMode;
+  DarkMode({ isClicked });
+  return <></>;
 }

@@ -4,6 +4,15 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
 import { MovieCard } from "@/app/_components/moviecard";
+import { SearchMain } from "@/app/_components/SearchMain";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { IoChevronDownOutline } from "react-icons/io5";
+import { FilteredGenre } from "@/app/_components/FilteredGenre";
+
 type ParamsType = {
   params: {
     details: string;
@@ -58,7 +67,25 @@ export default async function Page({ params }: ParamsType) {
   const recommondationMovie = await responseRecommmondations.json();
 
   return (
-    <>
+    <div>
+      <div className="flex justify-center items-center md:mt-[-60px] md:pb-[20px] gap-3">
+        <div className="w-[90px] h-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md max-md:hidden">
+          <Popover>
+            <PopoverTrigger>
+              <div className="flex items-center gap-2">
+                <IoChevronDownOutline />
+                <p>Genre </p>
+              </div>
+            </PopoverTrigger>
+            <PopoverContent>
+              <FilteredGenre />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="max-md:hidden">
+          <SearchMain />
+        </div>
+      </div>
       <div className="flex justify-between px-[25px]">
         <div>
           <h1 className="text-[30px] ">{resJson?.title}</h1>
@@ -74,9 +101,20 @@ export default async function Page({ params }: ParamsType) {
           </div>
         </div>
       </div>
-      <div className="flex justify-between px-[20px] gap-10">
-        <div className="">
-          <img src={`https://image.tmdb.org/t/p/w780/${resJson.poster_path}`} />
+      <div className="flex justify-between px-[20px]  md:block">
+        <div className="flex gap-6 justify-center">
+          <div>
+            <img
+              className="w-full max-w-[290px] min-w-[100px] h-auto"
+              src={`https://image.tmdb.org/t/p/original/${resJson.poster_path}`}
+            />
+          </div>
+          <div>
+            <img
+              className="max-md:hidden h-[415px]"
+              src={`https://image.tmdb.org/t/p/original/${resJson.backdrop_path}`}
+            />
+          </div>
         </div>
 
         <div className="">
@@ -130,13 +168,13 @@ export default async function Page({ params }: ParamsType) {
           <BsArrowRight />
         </Link>
       </div>
-      <div className="flex px-[25px] gap-5 ">
+      <div className="flex px-[25px] gap-5 max-md:grid grid-cols-2">
         {recommondationMovie.results
-          .slice(0, 2)
+          .slice(0, 5)
           .map((recoMovie: recoMovieType) => (
             <MovieCard key={recoMovie.id} movie={recoMovie} />
           ))}
       </div>
-    </>
+    </div>
   );
 }

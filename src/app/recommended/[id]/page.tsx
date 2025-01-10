@@ -13,6 +13,14 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import PaginationMade from "@/app/_components/Pagination";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { IoChevronDownOutline } from "react-icons/io5";
+import { FilteredGenre } from "@/app/_components/FilteredGenre";
+import { SearchMain } from "@/app/_components/SearchMain";
 
 type MovieType = {
   id: number;
@@ -54,6 +62,24 @@ export default function PageRecommend() {
 
   return (
     <>
+      <div className="flex justify-center items-center md:mt-[-60px] md:pb-[20px] gap-3">
+        <div className="w-[90px] h-[36px] border-[1px] border-[#E4E4E7] flex justify-center items-center rounded-md max-md:hidden">
+          <Popover>
+            <PopoverTrigger>
+              <div className="flex items-center gap-2">
+                <IoChevronDownOutline />
+                <p>Genre </p>
+              </div>
+            </PopoverTrigger>
+            <PopoverContent>
+              <FilteredGenre />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="max-md:hidden">
+          <SearchMain />
+        </div>
+      </div>
       <div className="text-[#09090B] px-[25px] py-[20px] font-semibold">
         Recommondation
       </div>

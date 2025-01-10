@@ -32,7 +32,9 @@ export const FilteredGenre = () => {
           >
             <Badge
               variant="outline"
-              className={`${genreId == genre.id ? "font-bold" : "font-normal"}`}
+              className={` ${
+                genreId == genre.id ? "font-bold" : "font-normal"
+              }`}
             >
               {genre.name}
               <ChevronRight />
