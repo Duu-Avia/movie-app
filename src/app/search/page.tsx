@@ -7,10 +7,10 @@ import { FilteredGenre } from "../_components/FilteredGenre";
 import { Navigator } from "../_components/navigator";
 import PaginationMade from "../_components/Pagination";
 import { SearchMain } from "../_components/SearchMain";
+import { MovieType } from "../_components/typescript";
 
 export default function PageSearch() {
-  const [movies, setMovies] = useState([]);
-
+  const [movies, setMovies] = useState<MovieType[]>([]);
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
   const [currentPage, setCurrentpage] = useState(1);

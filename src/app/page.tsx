@@ -1,14 +1,4 @@
-import Image from "next/image";
-import { Footer } from "./_components/footer";
-import { Input } from "@/components/ui/input";
-import { FiFilm } from "react-icons/fi";
-import { CiSearch } from "react-icons/ci";
-import { PiMoonLight } from "react-icons/pi";
-import { SearchIcon } from "./_components/searchicon";
-import { DarkMode } from "./_components/DarkMode";
-import { Navigator, NavigatorActive } from "./_components/navigator";
 import { Section } from "./_components/section";
-import { endianness } from "os";
 import { options } from "./_components/Token";
 import {
   Carousel,
@@ -19,7 +9,6 @@ import {
 } from "@/components/ui/carousel";
 import Link from "next/link";
 import { Star } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { SearchMain } from "./_components/SearchMain";
@@ -30,8 +19,11 @@ import {
 } from "@/components/ui/popover";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { FilteredGenre } from "./_components/FilteredGenre";
+import { useEffect, useState } from "react";
+import { Skeleton } from "./_components/Skeleton";
 
 export default async function Home() {
+  
   const data1 = await fetch(
     `https://api.themoviedb.org/3/movie/1125510`,
     options
@@ -47,6 +39,7 @@ export default async function Home() {
     options
   );
   const response3 = await data3.json();
+
 
   return (
     <>
@@ -192,7 +185,7 @@ export default async function Home() {
         </CarouselContent>
         <CarouselPrevious />
       </Carousel>
-
+    
       <Section title="Popular" endpoint="popular" />
       <Section title="Upcoming" endpoint="upcoming" />
       <Section title="Top_rated" endpoint="top_rated" />

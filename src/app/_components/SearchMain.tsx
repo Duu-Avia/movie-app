@@ -1,12 +1,14 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { SearchList } from "./SearchList";
 
-export const SearchMain = ({}) => {
-  const [searchValue, setSearchValue] = useState("");
+export type SearchValueType = string
 
-  const handleChanger = (e) => {
+export const SearchMain = () => {
+  const [searchValue, setSearchValue] = useState<SearchValueType>("");
+
+  const handleChanger = (e:ChangeEvent<HTMLInputElement>):void => {
     setSearchValue(e.target.value);
   };
 

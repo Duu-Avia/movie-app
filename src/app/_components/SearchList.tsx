@@ -4,9 +4,23 @@ import { options } from "./Token";
 import { Star } from "lucide-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { SearchValueType } from "./SearchMain";
 
-export const SearchList = ({ searchValue }) => {
-  const [movies, setMovies] = useState([]);
+type SearchValueTypeProps = {
+  searchValue: SearchValueType
+}
+type MoviesType = {
+  id: number;
+  title: string;
+  poster_path: string;
+  original_title: string
+  vote_average: number;
+  release_date: string
+  
+}
+
+export const SearchList = ({ searchValue }:SearchValueTypeProps) => {
+  const [movies, setMovies] = useState<MoviesType[]>([]);
   useEffect(() => {
     const fetchSearchData = async () => {
       const response = await fetch(

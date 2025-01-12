@@ -1,21 +1,28 @@
-const PaginationMade = ({
-  movies,
-  postPerPage,
-  setCurrentpage,
-  currentPage,
-}) => {
-  let pages = [];
-  for (let i = 1; i <= Math.ceil(movies?.length / postPerPage); i++) {
-    pages.push(i);
+  type PaginationType = {
+    movies: any
+    postPerPage: number
+    setCurrentpage: (page: number) => void;
+    currentPage: number
   }
-  const clickHandlerMinus = () => {
-    if (currentPage > 1) {
-      setCurrentpage(currentPage - 1);
+
+  const PaginationMade = ({
+    movies,
+    postPerPage,
+    setCurrentpage,
+    currentPage,
+  }:PaginationType) => {
+    let pages = [];
+    for (let i = 1; i <= Math.ceil(movies?.length / postPerPage); i++) {
+      pages.push(i);
     }
-  };
-  const clickHandlerPlus = () => {
-    setCurrentpage(currentPage + 1);
-  };
+    const clickHandlerMinus = () => {
+      if (currentPage > 1) {
+        setCurrentpage(currentPage - 1);
+      }
+    };
+    const clickHandlerPlus = () => {
+      setCurrentpage(currentPage + 1);
+    };
 
   return (
     <div className="flex gap-5 pt-[30px] px-[45px] justify-end">

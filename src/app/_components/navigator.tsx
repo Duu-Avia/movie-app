@@ -16,10 +16,15 @@ import { IoChevronDownOutline } from "react-icons/io5";
 import { FilteredGenre } from "./FilteredGenre";
 import { SearchMain } from "./SearchMain";
 
+type HandleChangerType = () => void
+type HandleChangerProps = {
+  handleChanger: HandleChangerType
+}
+
 export function Navigator() {
   const [isActive, setIsActive] = useState(true);
   const [isClicked, setIsClicked] = useState(false);
-  const handleChanger = () => {
+  const handleChanger:HandleChangerType = () => {
     setIsActive(!isActive);
   };
 
@@ -73,7 +78,7 @@ export function Navigator() {
   );
 }
 
-export function NavigatorActive({ handleChanger }) {
+export function NavigatorActive({ handleChanger }:HandleChangerProps) {
   return (
     <>
       <header className="flex justify-center items-center pt-[15px] pb-[35px]">

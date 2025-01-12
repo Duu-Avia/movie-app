@@ -6,10 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-//
+type genresType = {
+  id: number
+  name: string
+}
 export const FilteredGenre = () => {
   const genreId = 12;
-  const [genres, setGenres] = useState([]);
+  const [genres, setGenres] = useState<genresType[]>([]);
   useEffect(() => {
     const FetchGenre = async () => {
       const response = await fetch(
