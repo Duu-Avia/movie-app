@@ -1,4 +1,3 @@
-import { Navigator } from "@/app/_components/navigator";
 import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -47,21 +46,25 @@ const options = {
 };
 
 export default async function Page({ params }: ParamsType) {
+  const {details} = params;
+  if(!details){
+    return <div>error movie details...</div>
+  }
   const apiUrl = await fetch(
-    `https://api.themoviedb.org/3/movie/${params.details}`,
+    `https://api.themoviedb.org/3/movie/${details}`,
     options
   );
 
   const resJson = await apiUrl.json();
 
   const creditApiUrl = await fetch(
-    `https://api.themoviedb.org/3/movie/${params.details}/credits`,
+    `https://api.themoviedb.org/3/movie/${details}/credits`,
     options
   );
   const creditResJson = await creditApiUrl.json();
 
   const responseRecommmondations = await fetch(
-    `https://api.themoviedb.org/3/movie/${params.details}/recommendations`,
+    `https://api.themoviedb.org/3/movie/${details}/recommendations`,
     options
   );
   const recommondationMovie = await responseRecommmondations.json();
