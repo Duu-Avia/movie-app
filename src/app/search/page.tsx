@@ -68,7 +68,9 @@ function PageSearch() {
   );
 }
 export function Page() {
-  <Suspense>
-    <PageSearch />
-  </Suspense>;
+  return (
+    <Suspense>
+      <PageSearch />
+    </Suspense>
+  );
 }

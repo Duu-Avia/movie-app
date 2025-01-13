@@ -133,8 +133,10 @@ function PageSearch() {
 }
 
 export function Page() {
-  <Suspense>
-    <PageSearch />
-  </Suspense>;
+  return (
+    <Suspense>
+      <PageSearch />
+    </Suspense>
+  );
 }
 // https://api.themoviedb.org/3/discover/movie?with_genres=16&language=en-US&page=1

@@ -91,8 +91,10 @@ function PageContent() {
     </div>
   );
 }
-export function Page() {
-  <Suspense>
-    <PageContent />
-  </Suspense>;
+export default function Page() {
+  return (
+    <Suspense>
+      <PageContent />
+    </Suspense>
+  );
 }
