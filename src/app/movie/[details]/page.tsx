@@ -1,3 +1,4 @@
+"use client";
 import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -11,6 +12,8 @@ import {
 } from "@/components/ui/popover";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { FilteredGenre } from "@/app/_components/FilteredGenre";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 type ParamsType = {
   params: {
@@ -45,29 +48,38 @@ const options = {
   },
 };
 
-export default async function Page({ params }: ParamsType) {
-  const {details} = params;
-  if(!details){
-    return <div>error movie details...</div>
-  }
-  const apiUrl = await fetch(
-    `https://api.themoviedb.org/3/movie/${details}`,
-    options
-  );
+export default function Page() {
+  const params = useParams();
+  const [resJson, setresJson] = useState<any>();
+  const [creditResJson, setcreditResJson] = useState<any>();
+  const [recommondationMovie, setrecommondationMovie] = useState<any>();
 
-  const resJson = await apiUrl.json();
+  useEffect(() => {
+    const fetchdata = async () => {
+      const apiUrl = await fetch(
+        `https://api.themoviedb.org/3/movie/${params?.details}`,
+        options
+      );
 
-  const creditApiUrl = await fetch(
-    `https://api.themoviedb.org/3/movie/${details}/credits`,
-    options
-  );
-  const creditResJson = await creditApiUrl.json();
+      const resJson = await apiUrl.json();
+      setresJson(resJson);
 
-  const responseRecommmondations = await fetch(
-    `https://api.themoviedb.org/3/movie/${details}/recommendations`,
-    options
-  );
-  const recommondationMovie = await responseRecommmondations.json();
+      const creditApiUrl = await fetch(
+        `https://api.themoviedb.org/3/movie/${params?.details}/credits`,
+        options
+      );
+      const creditResJson = await creditApiUrl.json();
+      setcreditResJson(creditResJson);
+
+      const responseRecommmondations = await fetch(
+        `https://api.themoviedb.org/3/movie/${params?.details}/recommendations`,
+        options
+      );
+      const recommondationMovie = await responseRecommmondations.json();
+      setrecommondationMovie(recommondationMovie);
+    };
+    fetchdata();
+  }, [params?.details]);
 
   return (
     <div>
@@ -99,8 +111,8 @@ export default async function Page({ params }: ParamsType) {
             <Star className="stroke-yellow-300 fill-yellow-300" />
           </div>
           <div className="text-[#71717A]">
-            <div className="">{resJson.vote_average.toFixed(1)}/10</div>
-            <div>{resJson.popularity.toFixed(0)}k</div>
+            <div className="">{resJson?.vote_average.toFixed(1)}/10</div>
+            <div>{resJson?.popularity.toFixed(0)}k</div>
           </div>
         </div>
       </div>
@@ -109,13 +121,13 @@ export default async function Page({ params }: ParamsType) {
           <div>
             <img
               className="w-full max-w-[290px] min-w-[100px] h-auto"
-              src={`https://image.tmdb.org/t/p/original/${resJson.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original/${resJson?.poster_path}`}
             />
           </div>
           <div>
             <img
               className="max-md:hidden h-[415px]"
-              src={`https://image.tmdb.org/t/p/original/${resJson.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/original/${resJson?.backdrop_path}`}
             />
           </div>
         </div>
@@ -130,12 +142,12 @@ export default async function Page({ params }: ParamsType) {
               {genre.name}
             </Badge>
           ))}
-          <div>{resJson.overview}</div>
+          <div>{resJson?.overview}</div>
         </div>
       </div>
       <div className="flex gap-8 text-[16px] px-[25px] border-b-2 py-[20px]">
         <h1 className="font-semibold">Director</h1>
-        {creditResJson.crew
+        {creditResJson?.crew
           .filter((director: directorType) => director.job === "Director")
           .map((director: directorType) => {
             return <h1 key={director.id}>{director.name}</h1>;
@@ -143,7 +155,7 @@ export default async function Page({ params }: ParamsType) {
       </div>
       <div className="flex gap-8 text-[16px] px-[25px] border-b-2 py-[20px]">
         <h1 className="font-semibold">Writers </h1>
-        {creditResJson.crew
+        {creditResJson?.crew
           .filter((director: directorType) => director.department === "Writing")
           .slice(0, 3)
           .map((director: directorType) => {
@@ -153,7 +165,7 @@ export default async function Page({ params }: ParamsType) {
       <div className="flex px-[25px] gap-12 border-b-2 py-[20px]">
         <h1 className="font-semibold">Stars</h1>
         <div className="flex text-[16px]   w-[80%]">
-          {creditResJson.cast.slice(0, 4).map((cast: directorType) => {
+          {creditResJson?.cast?.slice(0, 4).map((cast: directorType) => {
             return <h1 key={cast.id}>{cast.name}</h1>;
           })}
         </div>
@@ -164,7 +176,7 @@ export default async function Page({ params }: ParamsType) {
           More like this
         </div>
         <Link
-          href={`/recommended/${resJson.id}`}
+          href={`/recommended/${resJson?.id}`}
           className="flex items-center gap-5 text-[#09090B]"
         >
           See more
@@ -172,7 +184,7 @@ export default async function Page({ params }: ParamsType) {
         </Link>
       </div>
       <div className="flex px-[25px] gap-5 max-md:grid grid-cols-2">
-        {recommondationMovie.results
+        {recommondationMovie?.results
           .slice(0, 5)
           .map((recoMovie: recoMovieType) => (
             <MovieCard key={recoMovie.id} movie={recoMovie} />
