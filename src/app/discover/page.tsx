@@ -6,6 +6,7 @@ import { options } from "../_components/Token";
 import { FilteredGenre } from "../_components/FilteredGenre";
 import { Navigator } from "../_components/navigator";
 import PaginationMade from "../_components/Pagination";
+import { MovieType } from "../_components/typescript";
 export default function PageSearch() {
   const [movies, setMovies] = useState([]);
 
@@ -107,7 +108,7 @@ export default function PageSearch() {
             </div>
           </div>
           <div className="px-[20px] ">
-            <FilteredGenre genreId={genres} />
+            <FilteredGenre />
           </div>
         </div>
         <div className="border-solid border-l-[1px]">
@@ -115,7 +116,7 @@ export default function PageSearch() {
             20 titles in <TestText />
           </div>
           <div className="grid grid-cols-2 gap-[10px] px-6 md:grid-cols-3 lg:grid-cols-5 lg:px-10 ">
-            {currentPost?.map((movie) => (
+            {currentPost?.map((movie: MovieType) => (
               <MovieCard key={`movie-${movie?.id}`} movie={movie} />
             ))}
           </div>
