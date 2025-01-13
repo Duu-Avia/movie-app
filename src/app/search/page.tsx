@@ -67,7 +67,7 @@ function PageSearch() {
     </>
   );
 }
-export function Page() {
+export default function Page() {
   return (
     <div>
       <Suspense>
