@@ -9,7 +9,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { MovieCard } from "../_components/moviecard";
 import { useRouter } from "next/navigation";
 import PaginationMade from "../_components/Pagination";
@@ -29,7 +29,7 @@ type ParamsType = {
 
 type NewPageType = number | string;
 
-export default function Page() {
+function PageContent() {
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
@@ -90,4 +90,9 @@ export default function Page() {
       />
     </div>
   );
+}
+export function Page() {
+  <Suspense>
+    <PageContent />
+  </Suspense>;
 }

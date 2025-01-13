@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { MovieCard } from "../_components/moviecard";
 import { options } from "../_components/Token";
 import { FilteredGenre } from "../_components/FilteredGenre";
@@ -9,7 +9,7 @@ import PaginationMade from "../_components/Pagination";
 import { SearchMain } from "../_components/SearchMain";
 import { MovieType } from "../_components/typescript";
 
-export default function PageSearch() {
+function PageSearch() {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
@@ -66,4 +66,9 @@ export default function PageSearch() {
       />
     </>
   );
+}
+export function Page() {
+  <Suspense>
+    <PageSearch />
+  </Suspense>;
 }

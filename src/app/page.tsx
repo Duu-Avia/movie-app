@@ -23,7 +23,6 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "./_components/Skeleton";
 
 export default async function Home() {
-  
   const data1 = await fetch(
     `https://api.themoviedb.org/3/movie/1125510`,
     options
@@ -39,7 +38,6 @@ export default async function Home() {
     options
   );
   const response3 = await data3.json();
-
 
   return (
     <>
@@ -185,7 +183,7 @@ export default async function Home() {
         </CarouselContent>
         <CarouselPrevious />
       </Carousel>
-    
+
       <Section title="Popular" endpoint="popular" />
       <Section title="Upcoming" endpoint="upcoming" />
       <Section title="Top_rated" endpoint="top_rated" />

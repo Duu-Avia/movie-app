@@ -1,13 +1,13 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { MovieCard } from "../_components/moviecard";
 import { options } from "../_components/Token";
 import { FilteredGenre } from "../_components/FilteredGenre";
 import { Navigator } from "../_components/navigator";
 import PaginationMade from "../_components/Pagination";
 import { MovieType } from "../_components/typescript";
-export default function PageSearch() {
+function PageSearch() {
   const [movies, setMovies] = useState([]);
 
   const searchParams = useSearchParams();
@@ -132,4 +132,9 @@ export default function PageSearch() {
   );
 }
 
+export function Page() {
+  <Suspense>
+    <PageSearch />
+  </Suspense>;
+}
 // https://api.themoviedb.org/3/discover/movie?with_genres=16&language=en-US&page=1
