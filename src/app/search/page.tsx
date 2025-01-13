@@ -69,8 +69,10 @@ function PageSearch() {
 }
 export function Page() {
   return (
-    <Suspense>
-      <PageSearch />
-    </Suspense>
+    <div>
+      <Suspense>
+        <PageSearch />
+      </Suspense>
+    </div>
   );
 }

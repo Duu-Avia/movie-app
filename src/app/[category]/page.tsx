@@ -93,8 +93,10 @@ function PageContent() {
 }
 export default function Page() {
   return (
-    <Suspense>
-      <PageContent />
-    </Suspense>
+    <div>
+      <Suspense>
+        <PageContent />
+      </Suspense>
+    </div>
   );
 }
